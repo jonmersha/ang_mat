@@ -10,3 +10,4 @@ export interface SignUpData{
     sex:string
     dob:string
 }
+
