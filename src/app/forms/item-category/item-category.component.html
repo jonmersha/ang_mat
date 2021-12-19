@@ -1,0 +1,38 @@
+<main class="form-signin">
+    <h1>Item Category Reigistration</h1>
+   
+    <form class="input-form"  (ngSubmit)="saveItemCategory()">
+        <mat-form-field class="input-full-width" appearance="fill">
+            <mat-label>Item Category Name</mat-label>
+            <input type="text" matInput [formControl]="categoryType" [errorStateMatcher]="matcher"
+                   placeholder="Ex. Please Inter Item Category name Spare Parts">
+            <mat-error *ngIf="categoryType.hasError('text') && !categoryType.hasError('required')">
+              Please inter Item category Name
+            </mat-error>
+            <mat-error *ngIf="categoryType.hasError('required')">
+              Item Category Name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+            <mat-form-field class="input-full-width" appearance="fill">
+                <mat-label>Categoty Description</mat-label>
+                <input color ="primary" type="text" matInput [formControl]="catDescriptionformcontrols" [errorStateMatcher]="matcher"
+                       placeholder="Ex. Please Inter Item Category name Spare Parts">
+                <mat-error *ngIf="catDescriptionformcontrols.hasError('text') && !catDescriptionformcontrols.hasError('required')">
+                  Please inter Item category Description
+                </mat-error>
+                <mat-error *ngIf="catDescriptionformcontrols.hasError('required')">
+                  Item Description is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              <section>
+                <div class="example-button-row" >
+                    <button mat-raised-button color="accent">Cancel</button>
+                    <button mat-raised-button type="submit" color="primary">Add</button>
+                </div>
+              </section>
+             
+
+
+    </form>
+
+</main>

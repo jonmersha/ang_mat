@@ -1,0 +1,84 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav 
+  #drawer 
+  class="sidenav" 
+  fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Besheger.com</mat-toolbar>
+    <mat-nav-list>
+      <cdk-accordion class="accordion">
+        <cdk-accordion-item
+          *ngFor="let item of items; let index = index;"
+          #accordionItem="cdkAccordionItem"
+          class="accordion-item"
+          role="button"
+          tabindex="0"
+          [attr.id]="'accordion-header-' + index"
+          [attr.aria-expanded]="accordionItem.expanded"
+          [attr.aria-controls]="'accordion-body' + index">
+          <div class="accordion-item-header" (click)="accordionItem.toggle()">
+            {{ item }}
+            <span class="accordion-item-description">
+              <span *ngIf='!accordionItem.expanded' class="material-icons">
+                expand_more
+                </span>
+              <span *ngIf='accordionItem.expanded' class="material-icons">
+                keyboard_double_arrow_up
+                </span>
+            </span>
+          </div>
+          <div
+            class="accordion-item-body"
+            role="region"
+            [style.display]="accordionItem.expanded ? '' : 'none'"
+            [attr.id]="'accordion-body-' + index"
+            [attr.aria-labelledby]="'accordion-header-' + index">
+            <div class='row' *ngFor="let items of getMenu(index)">
+              <a [routerLink]=items>{{items}}</a>
+              <mat-divider></mat-divider>
+            </div>
+          </div>
+        </cdk-accordion-item>
+      </cdk-accordion>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="secondary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <button
+      type="button"
+      aria-label="Toggle sidenav"
+      mat-icon-button
+      (click)="drawer.toggle()"
+      *ngIf="(isHandset$ | async)===false">
+      <span class="material-icons">
+        switch_right
+        </span>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="users">Sells</button>
+    <mat-menu #users="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="newSells">New Sells</button>
+      <button mat-menu-item [matMenuTriggerFor]="reports">Selles report</button>
+      <button mat-menu-item>Birds</button>
+      <button mat-menu-item>Mammals</button>
+    </mat-menu>
+
+      <!-- <span>Besheger.com</span>
+      <span class="spacer">few things</span> -->
+      
+    </mat-toolbar>
+    <!-- <ng-content></ng-content> -->
+    <!-- Add Content Here -->
+    <router-outlet> </router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
